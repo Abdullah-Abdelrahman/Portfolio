@@ -471,3 +471,18 @@
     drop-shadow(0 0 25px rgba(255, 60, 100, 0.8))
     drop-shadow(0 0 40px rgba(255, 40, 90, 0.7));
 }
+
+/*Slider*/
+.slider-track {
+  display: flex;
+  width: max-content;
+  animation: scrollLeft 20s linear infinite;
+}
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

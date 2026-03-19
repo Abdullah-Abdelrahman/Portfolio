@@ -1,5 +1,6 @@
 import { Section } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Slider } from "./Slider";
 
 const skills = [
   // Frontend
@@ -38,7 +39,23 @@ const Categoryies = ["all", "frontend", "backend", "tools", "more"];
 
 export const SkillsSection = () => {
   const [selectedSkills, setSelectedSkills] = useState(skills);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
+  useEffect(() => {
+    // Define the check function
+    const checkSize = () => {
+      setIsSmallScreen(window.innerWidth <= 768); // 768px is standard for "md"
+    };
+
+    // Run on mount
+    checkSize();
+
+    // Add event listener
+    window.addEventListener("resize", checkSize);
+
+    // Cleanup listener on unmount
+    return () => window.removeEventListener("resize", checkSize);
+  }, []);
   const generateStars = (category) => {
     if (category === "all") {
       setSelectedSkills(skills);
@@ -67,7 +84,7 @@ export const SkillsSection = () => {
         </svg>
       </div>
 
-      <div className="container mx-auto max-w-5xl">
+      <div className="container mx-auto max-w-5xl mb-9">
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
           My <span className="text-primary text-glow">Skills</span>
         </h2>
@@ -87,33 +104,53 @@ export const SkillsSection = () => {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-3.5 justify-center"
           style={{ justifyItems: "center" }}
         >
-          {selectedSkills.map((skill, key) => (
-            <div key={key} className="card-wrapper w-fit rounded-2xl">
-              <div className="card  rounded-lg shadow-xs relative">
-                <img
-                  src="/imgs/skillCard1.png"
-                  style={{ height: "200px", width: "200px" }}
-                  className="relative z-1"
-                />
+          {isSmallScreen
+            ? Array.from({ length: Math.ceil(selectedSkills.length / 4) }).map(
+                (_, i) => {
+                  const chunkSize = 4;
+                  const start = i * chunkSize;
+                  let chunk = selectedSkills.slice(start, start + chunkSize);
 
-                <div className="w-full absolute top-[30%] flex flex-col justify-center items-center z-2">
-                  <div className="mb-4">
-                    <h3 className="text-3xl font-semibold">{skill.name}</h3>
-                  </div>
+                  // ✅ fix last chunk
+                  if (chunk.length < chunkSize) {
+                    const needed = chunkSize - chunk.length;
 
-                  <div className="mt-3.5">
-                    <span className="text-2xl text-muted-foreground">
-                      {skill.level}%
-                    </span>
+                    // take from previous items
+                    const extra = selectedSkills.slice(start - needed, start);
+
+                    chunk = [...extra, ...chunk];
+                  }
+
+                  return <Slider key={i} skilles={chunk} />;
+                },
+              )
+            : selectedSkills.map((skill, key) => (
+                <div key={key} className="card-wrapper w-fit rounded-2xl">
+                  <div className="card  rounded-lg shadow-xs relative">
+                    <img
+                      src="/imgs/skillCard1.png"
+                      style={{ height: "200px", width: "200px" }}
+                      className="relative z-1"
+                    />
+
+                    <div className="w-full absolute top-[30%] flex flex-col justify-center items-center z-2">
+                      <div className="mb-4">
+                        <h3 className="text-3xl font-semibold">{skill.name}</h3>
+                      </div>
+
+                      <div className="mt-3.5">
+                        <span className="text-2xl text-muted-foreground">
+                          {skill.level}%
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              ))}
         </div>
       </div>
 
-      <div class="custom-shape-divider-bottom-1773003016">
+      <div class="custom-shape-divider-bottom-1773003016 ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1200 120"
