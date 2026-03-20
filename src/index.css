@@ -132,12 +132,12 @@
 @layer base {
   :root {
     /* LIGHT MODE VARIABLES */
-    --background: #f2aba6;
-    --foreground: gray;
-    --border: 240 5.9% 90%;
-    --primary: #bdbfbf;
-    --primary-foreground: 0 0% 100%;
-    --card: 0 0% 100%;
+    --background: #b84c4f;
+    --foreground: #bdbfbf;
+    --border: 240 3.7% 15.9%;
+    --primary: #720e0e;
+    --primary-foreground: 240 10% 3.9%;
+    --card: #720e0e;
     --dark-background: #230206;
   }
 

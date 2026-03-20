@@ -1,6 +1,7 @@
 import { Moon, Sun } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import DarkEye from "./DarkEye";
 function ThemeToggle() {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     return localStorage.getItem("theme") === "dark";
@@ -28,6 +29,8 @@ function ThemeToggle() {
       ) : (
         <Moon className="h-8 w-8 text-blue-900" />
       )}
+
+      <DarkEye isActive={isDarkMode} />
     </button>
   );
 }
