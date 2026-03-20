@@ -51,6 +51,7 @@ export const ProjectsSection = () => {
             <div
               key={key}
               className="group bg-card/10  overflow shadow-xs card-hover relative rounded-4xl"
+              style={{ aspectRatio: "1 / 1.25", minHeight: "auto" }}
             >
               <img
                 src="/imgs/project_card_border.png"

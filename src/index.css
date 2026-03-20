@@ -347,7 +347,7 @@
 /* skill section speration */
 .custom-shape-divider-bottom-1773002973 {
   position: absolute;
-  bottom: 0;
+  bottom: -5px;
   left: 0;
   width: 100%;
   overflow: visible;
@@ -364,7 +364,7 @@
 }
 
 .custom-shape-divider-bottom-1773002973 .shape-fill {
-  fill: var(--dark-background);
+  fill: rgb(35, 2, 6);
 }
 
 .custom-shape-divider-bottom-1773003016 {
@@ -393,7 +393,7 @@
 
 .custom-shape-divider-top-1773090879 {
   position: absolute;
-  top: 0;
+  top: -2px;
   left: 0;
   width: 100%;
   overflow: hidden;
@@ -423,7 +423,7 @@
 
 .custom-shape-divider-bottom-1773091271 {
   position: absolute;
-  bottom: 0;
+  bottom: -2px;
   left: 0;
   width: 100%;
   overflow: hidden;
